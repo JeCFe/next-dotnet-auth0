@@ -1,4 +1,5 @@
-server/Server/.idea
-server/Server/bin
-server/Server/obj
+*.idea
+*bin
+*obj
 
+server/next-dotnet-auth0.sln.DotSettings.user

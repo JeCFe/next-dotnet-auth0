@@ -12,14 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="server\Code\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EditorConfigFiles Include="server\obj\Debug\net7.0\Server.GeneratedMSBuildEditorConfig.editorconfig" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Include="server\Properties\launchSettings.json" />
   </ItemGroup>
 
