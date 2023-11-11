@@ -7,6 +7,10 @@ public class Program
     static async Task Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
+        IConfiguration configuration = new ConfigurationBuilder()
+            .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
+            .AddJsonFile("appsettings.development.json")
+            .Build();
         
         builder.Services.AddAuthentication(options =>
         {
@@ -14,8 +18,8 @@ public class Program
             options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
         }).AddJwtBearer(options =>
         {
-            options.Authority = "https://dev-yf34hkokp08w5btt.uk.auth0.com/";
-            options.Audience = "Test";
+            options.Authority = configuration["Auth0:Authority"];
+            options.Audience = configuration["Auth0:Audience"];
         });
 
         builder.Services.AddHealthChecks();
