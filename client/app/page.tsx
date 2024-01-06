@@ -1,5 +1,6 @@
 "use client";
 import { useUser } from "@auth0/nextjs-auth0/client";
+import { Button } from "@jecfe/react-design-system";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
@@ -40,35 +41,10 @@ export default function Home() {
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>{error.message}</div>;
   return (
-    <div>
-      Hello world!
-      <div>
-        <a className="inline-block" href="/api/auth/login">
-          Login
-        </a>
-      </div>
-      <div>
-        <a className="inline-block" href="/api/auth/logout">
-          Logout
-        </a>
-      </div>
-      <div>
-        {user && (
-          <div>
-            {/* eslint-disable-next-line @next/next/no-img-element*/}
-            <img src={user.picture} alt={user.name} />
-            <h2>{user.updated_at}</h2>
-            <p>{user.email}</p>
-          </div>
-        )}
-      </div>
-      <button
-        className="mt-5"
-        onClick={(e) => callApi()}
-        data-testid="external-action"
-      >
-        Ping API
-      </button>
+    <div className="space-y-4">
+      <Button onClick={(e) => callApi()}>Ping API</Button>
+      <div>API Response: {response ?? "No response to render"}</div>
+      <div>API Error: {stateError ?? "No error to render"}</div>
     </div>
   );
 }
