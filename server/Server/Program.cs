@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.OpenApi.Models;
+using Server.filters;
 using Server.Routes;
 
 public class Program
@@ -11,50 +12,74 @@ public class Program
             .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
             .AddJsonFile("appsettings.development.json")
             .Build();
-        
-        builder.Services.AddAuthentication(options =>
-        {
-            options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-            options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-        }).AddJwtBearer(options =>
-        {
-            options.Authority = configuration["Auth0:Authority"];
-            options.Audience = configuration["Auth0:Audience"];
-        });
+
+        builder
+            .Services
+            .AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(options =>
+            {
+                options.Authority = configuration["Auth0:Authority"];
+                options.Audience = configuration["Auth0:Audience"];
+            });
 
         builder.Services.AddHealthChecks();
         builder.Services.AddEndpointsApiExplorer();
-        builder.Services.AddSwaggerGen(options =>
-        {
-            options.SwaggerDoc("v1", new OpenApiInfo { Version = "0.1.0", Title = "Backend Service" });
-            options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+        builder
+            .Services
+            .AddSwaggerGen(options =>
             {
-                Name = "Authorization",
-                Description = "JWT Authorization header using the Bearer scheme",
-                In = ParameterLocation.Header,
-                Type = SecuritySchemeType.Http,
-                Scheme = "bearer",
-                Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "Bearer" }
-            });
-
-            options.AddSecurityRequirement(new OpenApiSecurityRequirement
-            {
-                {
+                options.SwaggerDoc(
+                    "v1",
+                    new OpenApiInfo { Version = "0.1.0", Title = "Backend Service" }
+                );
+                options.SchemaFilter<NullabilityFilter>();
+                options.AddSecurityDefinition(
+                    "Bearer",
                     new OpenApiSecurityScheme
                     {
-                        Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "Bearer" }
-                    },
-                    new string[] { }
-                }
+                        Name = "Authorization",
+                        Description = "JWT Authorization header using the Bearer scheme",
+                        In = ParameterLocation.Header,
+                        Type = SecuritySchemeType.Http,
+                        Scheme = "bearer",
+                        Reference = new OpenApiReference
+                        {
+                            Type = ReferenceType.SecurityScheme,
+                            Id = "Bearer"
+                        }
+                    }
+                );
+
+                options.AddSecurityRequirement(
+                    new OpenApiSecurityRequirement
+                    {
+                        {
+                            new OpenApiSecurityScheme
+                            {
+                                Reference = new OpenApiReference
+                                {
+                                    Type = ReferenceType.SecurityScheme,
+                                    Id = "Bearer"
+                                }
+                            },
+                            new string[] { }
+                        }
+                    }
+                );
             });
-        });
-        builder.Services.AddCors(options =>
-        {
-            options.AddDefaultPolicy(policy =>
+        builder
+            .Services
+            .AddCors(options =>
             {
-                policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+                options.AddDefaultPolicy(policy =>
+                {
+                    policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+                });
             });
-        });
         builder.Services.AddAuthorization();
 
         var app = builder.Build();
@@ -65,11 +90,11 @@ public class Program
         });
         app.UseCors();
         app.UseAuthentication();
-       app.UseAuthorization();
+        app.UseAuthorization();
 
         app.MapHealthChecks("/healthz");
         app.MapGroup("/auth").MapAuthEndpoints();
-        
+
         app.Run();
     }
 }
