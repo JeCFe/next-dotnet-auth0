@@ -25,7 +25,7 @@ export default function Home() {
   if (error) return <div>{error.message}</div>;
   return (
     <div className="space-y-4">
-      <Button onClick={(e) => callApi()}>Ping API</Button>
+      <Button onClick={() => callApi()}>Ping API</Button>
       {loading ? (
         <Spinner />
       ) : (
