@@ -4,6 +4,19 @@ Simple Dotnet mininal API backed boilerplate.
 
 ## Local run
 
+# Env
+
+Inside an _appsettings.local.json_ or _appsettings.development.json_ include the following from your Auth0 details
+
+```
+  "Auth0": {
+    "Domain": *****,
+    "ClientId": ****,
+    "ClientSecret": ****,
+    "Audience": ****
+  }
+```
+
 Run the service by:
 
 ```bash
