@@ -1,3 +1,4 @@
+using System.Reflection;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.OpenApi.Models;
 using Server.filters;
@@ -22,7 +23,7 @@ public class Program
             })
             .AddJwtBearer(options =>
             {
-                options.Authority = configuration["Auth0:Authority"];
+                options.Authority = configuration["Auth0:Domain"];
                 options.Audience = configuration["Auth0:Audience"];
             });
 
@@ -70,6 +71,47 @@ public class Program
                         }
                     }
                 );
+                options.ResolveConflictingActions(x => x.First());
+                options.AddSecurityDefinition(
+                    "oauth2",
+                    new OpenApiSecurityScheme
+                    {
+                        Type = SecuritySchemeType.OAuth2,
+                        BearerFormat = "JWT",
+                        Flows = new OpenApiOAuthFlows
+                        {
+                            Implicit = new OpenApiOAuthFlow
+                            {
+                                TokenUrl = new Uri(
+                                    $"https://{configuration["Auth0:Domain"]}/oauth/token"
+                                ),
+                                AuthorizationUrl = new Uri(
+                                    $"https://{configuration["Auth0:Domain"]}/authorize?audience={configuration["Auth0:Audience"]}"
+                                ),
+                            }
+                        }
+                    }
+                );
+                options.AddSecurityRequirement(
+                    new OpenApiSecurityRequirement
+                    {
+                        {
+                            new OpenApiSecurityScheme
+                            {
+                                Reference = new OpenApiReference
+                                {
+                                    Type = ReferenceType.SecurityScheme,
+                                    Id = "oauth2"
+                                }
+                            },
+                            new string[] { }
+                        }
+                    }
+                );
+
+                // var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                // var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                // options.IncludeXmlComments(xmlPath);
             });
         builder
             .Services
@@ -84,10 +126,14 @@ public class Program
 
         var app = builder.Build();
         app.UseSwagger();
-        app.UseSwaggerUI(c =>
+        app.UseSwaggerUI(settings =>
         {
-            c.SwaggerEndpoint("/swagger/v1/swagger.json", "V1");
+            settings.SwaggerEndpoint("/swagger/v1/swagger.json", "API v1.0");
+            settings.OAuthClientId(configuration["Auth0:ClientId"]);
+            settings.OAuthClientSecret(configuration["Auth0:ClientSecret"]);
+            settings.OAuthUsePkce();
         });
+
         app.UseCors();
         app.UseAuthentication();
         app.UseAuthorization();
