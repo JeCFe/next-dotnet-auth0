@@ -3,7 +3,6 @@
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
     "types": ["cypress", "@testing-library/cypress", "jest"],
-
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -29,7 +28,8 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "cypress.config.ts"
+    "cypress.config.ts",
+    "next.config.js"
   ],
   "exclude": ["node_modules"]
 }
