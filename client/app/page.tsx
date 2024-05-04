@@ -2,6 +2,7 @@
 import { getApiClient } from "@/services";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import { Button, Spinner } from "@jecfe/react-design-system";
+import { ApiResponse } from "openapi-typescript-fetch";
 import { useState } from "react";
 
 const testApi = getApiClient().path("/auth").method("get").create();
@@ -16,7 +17,9 @@ export default function Home() {
   const callApi = async () => {
     setLoading(true);
     await testApi({})
-      .then((response) => setResponse(response.data))
+      .then((response: ApiResponse<string>) =>
+        setResponse(response.data as string),
+      )
       .catch((e) => setApiError(e));
     setLoading(false);
   };
