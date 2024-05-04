@@ -44,6 +44,12 @@ jobs:
           name: SecretsVariables
           path: "secrets.txt"
 
+      - uses: actions/upload-artifact@v3
+        name: Upload Artifact
+        with:
+          name: ABC
+          path: "vars.txt"
+
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
