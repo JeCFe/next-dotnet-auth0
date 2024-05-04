@@ -31,12 +31,25 @@
         "type": "http",
         "description": "JWT Authorization header using the Bearer scheme",
         "scheme": "bearer"
+      },
+      "oauth2": {
+        "type": "oauth2",
+        "flows": {
+          "implicit": {
+            "authorizationUrl": "https://dev-yf34hkokp08w5btt.uk.auth0.com/authorize?audience=/auth",
+            "tokenUrl": "https://dev-yf34hkokp08w5btt.uk.auth0.com/oauth/token",
+            "scopes": {}
+          }
+        }
       }
     }
   },
   "security": [
     {
       "Bearer": []
+    },
+    {
+      "oauth2": []
     }
   ]
 }
