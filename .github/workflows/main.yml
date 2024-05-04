@@ -19,10 +19,6 @@ jobs:
         working-directory: ./client
         run: echo -e "\n//npm.pkg.github.com/:_authToken-${{ secrets.GITHUB_TOKEN }}" >> ./.npmrc
 
-      - name: Test
-        working-directory: ./client
-        run: ls
-
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
@@ -34,13 +30,13 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: npm install
 
-      - name: Build client
-        working-directory: ./client
-        run: npm run build
-
       - name: Unit tests
         working-directory: ./client
         run: npm run test
+
+      - name: Build client
+        working-directory: ./client
+        run: npm run build
 
       - name: Docker Compose
         env:
