@@ -44,6 +44,7 @@ jobs:
         run: npx jest --ci --reporters=default --reporters=jest-junit
 
       - uses: dorny/test-reporter@v1
+        if: success() || failure()
         with:
           artifact: test-results
           name: JEST Tests
