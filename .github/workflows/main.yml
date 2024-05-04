@@ -19,6 +19,10 @@ jobs:
       - name: "Setup npmrc"
         working-directory: ./client
         run: echo -e "\n//npm.pkg.github.com/:_authToken-${{ secrets.GITHUB_TOKEN }}" >> ./.npmrc
+
+      - name: Test
+        working-directory: ./client
+        run: ls
       
 
       - name: Setup Node
