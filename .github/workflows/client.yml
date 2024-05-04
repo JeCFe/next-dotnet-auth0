@@ -9,7 +9,6 @@ permissions:
   id-token: write
 
 jobs:
-  # Build job
   test-and-build-next:
     runs-on: ubuntu-latest
     steps:
@@ -71,3 +70,8 @@ jobs:
         with:
           name: cypress-screenshots
           path: ./client/cypress/screenshots
+
+      - name: Docker container
+        if: failure()
+        run: |
+          docker compose logs

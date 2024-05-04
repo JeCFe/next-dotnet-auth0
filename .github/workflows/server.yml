@@ -9,7 +9,6 @@ permissions:
   id-token: write
 
 jobs:
-  # Build job
   test-and-build-dotnet:
     runs-on: ubuntu-latest
     steps:
@@ -61,8 +60,8 @@ jobs:
         with:
           name: cypress-screenshots
           path: ./server/cypress/screenshots
+
       - name: Docker container
         if: failure()
         run: |
-          docker compose logs  
-          docker compose inspect ${docker container ls -q --filter name="server"}
+          docker compose logs
