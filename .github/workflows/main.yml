@@ -30,6 +30,10 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: npm install
 
+      - name: Build API client
+        working-directory: ./client
+        run: npm run build:client
+
       - name: Unit tests
         working-directory: ./client
         run: npm run test
