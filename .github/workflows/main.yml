@@ -60,5 +60,5 @@ jobs:
         env:
           CYPRESS_USERNAME: ${{ secrets.CYPRESS_USERNAME }}
           CYPRESS_PASSWORD: ${{ secrets.CYPRESS_PASSWORD }}
-          CYPRESS_DOMAIN: ${{ secrets.CYPRESS_DOMAIN }}
+          CYPRESS_DOMAIN: ${{ vars.CYPRESS_DOMAIN }}
         run: npm run cypress:e2e
