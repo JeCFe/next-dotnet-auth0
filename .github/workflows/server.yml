@@ -52,7 +52,7 @@ jobs:
         run: docker-compose up -d server
 
       - name: Wait for
-        run: npx wait-on http://localhost:3000 --verbose --timeout 10000
+        run: npx wait-on http://localhost:5247 --verbose --timeout 10000
 
       - name: Cypress run with env
         uses: cypress-io/github-action@v6
