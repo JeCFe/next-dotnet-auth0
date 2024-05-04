@@ -30,8 +30,8 @@ Cypress.Commands.add("login", () => {
     url: Cypress.env("auth_url"),
     body: {
       grant_type: "password",
-      username: Cypress.env("auth_username"),
-      password: Cypress.env("auth_password"),
+      username: Cypress.env("CYPRESS_USERNAME"),
+      password: Cypress.env("CYPRESS_PASSWORD"),
       audience: Cypress.env("auth_audience"),
 
       client_id: Cypress.env("auth_client_id"),
