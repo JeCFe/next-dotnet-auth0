@@ -23,7 +23,7 @@ public class Program
             })
             .AddJwtBearer(options =>
             {
-                options.Authority = configuration["Auth0:Domain"];
+                options.Authority = $"https://{configuration["Auth0:Domain"]}";
                 options.Audience = configuration["Auth0:Audience"];
             });
 
@@ -108,10 +108,6 @@ public class Program
                         }
                     }
                 );
-
-                // var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-                // var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-                // options.IncludeXmlComments(xmlPath);
             });
         builder
             .Services
