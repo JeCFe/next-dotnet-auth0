@@ -48,7 +48,6 @@ jobs:
           Auth0__Audience: ${{ secrets.AUTH0_AUDIENCE }}
           Auth0__ClientId: ${{ secrets.AUTH0_CLIENT_ID }}
           Auth0__ClientSecret: ${{ secrets.AUTH0_CLIENT_SECRET }}
-
         run: docker-compose up -d server
 
       - name: Cypress run with env
@@ -62,3 +61,8 @@ jobs:
         with:
           name: cypress-screenshots
           path: ./server/cypress/screenshots
+      - name: Docker container
+        if: failure()
+        run: |
+          docker compose logs  
+          docker compose inspect ${docker container ls -q --filter name="server"}
