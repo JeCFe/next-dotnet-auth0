@@ -48,7 +48,7 @@ jobs:
         if: success() || failure()
         with:
           name: Jest Tests
-          path: client/jest-*.xml
+          path: ./client/junit.xml
           reporter: jest-junit
 
       - name: Build client

@@ -36,3 +36,4 @@ yarn-error.log*
 next-env.d.ts
 server-client.d.ts
 cypress.env.json
+junit.xml
