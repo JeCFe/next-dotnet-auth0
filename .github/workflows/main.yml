@@ -24,7 +24,9 @@ jobs:
           SECRETS_VARS: ${{ toJson(vars) }}
         run: echo "$SECRETS_VARS" > "./client/cypress.env.json"
 
-      - run: ls
+      - run: |
+          cd client
+          ls
 
       - name: Setup Node
         uses: actions/setup-node@v3
