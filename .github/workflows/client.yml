@@ -43,6 +43,14 @@ jobs:
         working-directory: ./client
         run: npx jest --ci --reporters=default --reporters=jest-junit
 
+      - name: Test Report
+        uses: dorny/test-reporter@v1
+        if: success() || failure()
+        with:
+          name: Jest Tests
+          path: client/jest-*.xml
+          reporter: jest-junit
+
       - name: Build client
         working-directory: ./client
         run: npm run build
