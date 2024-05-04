@@ -19,6 +19,11 @@ jobs:
         working-directory: ./client
         run: echo -e "\n//npm.pkg.github.com/:_authToken-${{ secrets.GITHUB_TOKEN }}" >> ./.npmrc
 
+      - name: "Echo in file"
+        env:
+          SECRETS_VARS: ${{ toJson(vars) }}
+        run: echo "$SECRETS_VARS" > "./client/cypress.env.json"
+
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
