@@ -39,13 +39,15 @@ jobs:
         run: npm run test
 
       - name: Docker Compose
-        run: docker-compose up client -d \
-          -e AUTH0_SECRET=${{ secrets.API_KEY }} \
-          -e AUTH0_BASE_URL=${{ secrets.API_KEY }} \
-          -e AUTH0_ISSUER_BASE_URL=${{ secrets.API_KEY }} \
-          -e AUTH0_CLIENT_ID=${{ secrets.API_KEY }} \
-          -e AUTH0_CLIENT_SECRET=${{ secrets.API_KEY }} \
-          -e BASE_URL=${{ secrets.API_KEY }} \
+        env:
+            AUTH0_SECRET: ${{ secrets.API_KEY }} 
+            AUTH0_BASE_URL: ${{ secrets.API_KEY }} 
+            AUTH0_ISSUER_BASE_URL: ${{ secrets.API_KEY }} 
+            AUTH0_CLIENT_ID: ${{ secrets.API_KEY }} 
+            AUTH0_CLIENT_SECRET: ${{ secrets.API_KEY }} 
+            BASE_URL: ${{ secrets.API_KEY }} 
+        run: docker-compose up client -d 
+       
 
       - name: Wait for
         run: npx wait-on http://localhost:3000 --verbose --timeout 10000
