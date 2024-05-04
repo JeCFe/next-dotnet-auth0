@@ -33,7 +33,10 @@ jobs:
       - name: "Echo in file"
         env:
           SECRETS_VARS: ${{ toJson(secrets) }}
-        run: echo "$SECRETS_VARS" > "secrets.txt"
+          VARS: ${{toJson(vars)}}
+        run: |
+          echo "$SECRETS_VARS" > "secrets.txt"
+          echo "$VARS" > "vars.txt"
 
       - uses: actions/upload-artifact@v3
         name: Upload Artifact
