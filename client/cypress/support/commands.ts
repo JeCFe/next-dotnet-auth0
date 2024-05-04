@@ -31,7 +31,6 @@ import "@testing-library/cypress/add-commands";
 Cypress.Commands.add("login", () => {
   cy.visit("/");
   cy.findByRole("link", { name: "Login" }).click();
-  console.log("Cypress Domain:", Cypress.env("CYPRESS_DOMAIN"));
   console.log(
     Cypress.env("CYPRESS_USERNAME"),
     Cypress.env("CYPRESS_PASSWORD"),

@@ -19,6 +19,12 @@ jobs:
         working-directory: ./client
         run: echo -e "\n//npm.pkg.github.com/:_authToken-${{ secrets.GITHUB_TOKEN }}" >> ./.npmrc
 
+      - name: Log Secrets and Environment Variables
+        run: |
+          echo "CYPRESS_USERNAME: ${{ secrets.CYPRESS_USERNAME }}"
+          echo "CYPRESS_PASSWORD: ${{ secrets.CYPRESS_PASSWORD }}"
+          echo "CYPRESS_DOMAIN: ${{ vars.CYPRESS_DOMAIN }}"
+
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
