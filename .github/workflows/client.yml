@@ -43,6 +43,10 @@ jobs:
         working-directory: ./client
         run: npx jest --ci --reporters=default --reporters=jest-junit
 
+      - run: |
+          cd client
+          ls
+
       - uses: dorny/test-reporter@v1
         if: success() || failure()
         with:
