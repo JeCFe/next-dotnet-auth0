@@ -29,6 +29,36 @@ This will open a website you can view the swagger UI by going to:
 http://localhost:SOMEPORT/swagger/index.html
 ```
 
+## Local Tests
+
+# Automation tests
+
+You will need the following in a `cypress.env.json` file
+
+```
+{
+  "auth_audience": ****,
+  "auth_url": ****,
+  "auth_client_id": ****,
+  "auth_client_secret": ****,
+  "auth_username": ****,
+  "auth_password": ****,
+}
+
+```
+
+You can open up Cypress via
+
+```bash
+npx cypress open
+```
+
+# Unit tests
+
+```bash
+dotnet test
+```
+
 ## Generate Swagger
 
 To generate the swagger `api-spec.json` run the following command.

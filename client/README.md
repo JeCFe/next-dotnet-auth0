@@ -18,6 +18,27 @@ In this `build:client` refers to building the TS client from the api-spec.json b
 
 In event TS Client does not build, look at the Server readme for more instructions.
 
+## Local Tests
+
+# Automation tests
+
+You will need the following in a `cypress.env.json` file
+
+```
+{
+  "auth_username": ****,
+  "auth_password": ****,
+  "auth_domain": ****
+}
+
+```
+
+You can open up Cypress via
+
+```bash
+npx cypress open
+```
+
 ## Environment Variables
 
 These enviroment variables are required in a `.env.local`. For `BASE_URL` set this as your backend service, if you have more than one backend service add new variables. Look at `getApiClient`for a plan on how to set up additional clients.
