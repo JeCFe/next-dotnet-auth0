@@ -27,7 +27,7 @@
 Cypress.Commands.add("login", () => {
   cy.request({
     method: "POST",
-    url: Cypress.env("AUTH0_BASE_URL"),
+    url: Cypress.env("AUTH0_OAUTH_URL"),
     body: {
       grant_type: "password",
       username: Cypress.env("CYPRESS_USERNAME"),
