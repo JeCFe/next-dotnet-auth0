@@ -10,7 +10,7 @@ permissions:
 
 jobs:
   # Build job
-  build:
+  Test_And_Build_Node:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -34,6 +34,10 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: npm install
 
+      - name: Build client
+        working-directory: ./client
+        run: npm run build
+
       - name: Unit tests
         working-directory: ./client
         run: npm run test
@@ -50,3 +54,10 @@ jobs:
 
       - name: Wait for
         run: npx wait-on http://localhost:3000 --verbose --timeout 10000
+
+      - name: Run Cypress Tests
+        env:
+          auth_username: ${{ secrets.auth_username }}
+          auth_password: ${{ secrets.auth_password }}
+          auth_domain: ${{ secrets.auth_domain }}
+        run: npm run cypress:e2e

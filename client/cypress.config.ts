@@ -1,11 +1,6 @@
 import { defineConfig } from "cypress";
 
 export default defineConfig({
-  reporter: "mocha-trx-scheenshots-reporter/trx.js",
-  reporterOptions: {
-    output: "results/[hash]_cypress_e2e.trx",
-    toConsole: true,
-  },
   viewportWidth: 1600,
   viewportHeight: 900,
   video: false,

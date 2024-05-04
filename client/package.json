@@ -9,7 +9,8 @@
     "lint": "eslint '*/**/*.{js,jsx,ts,tsx}' --quiet",
     "build:client": "npx openapi-typescript ../server/ServerTests/_snapshots/api-spec.json -o server-client.d.ts",
     "test": "jest",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "cypress:e2e": "cypress run --browser chrome"
   },
   "dependencies": {
     "@auth0/nextjs-auth0": "^3.2.0",
