@@ -93,4 +93,4 @@ jobs:
         env:
           CYPRESS_USERNAME: ${{ secrets.CYPRESS_USERNAME }}
           CYPRESS_PASSWORD: ${{ secrets.CYPRESS_PASSWORD }}
-          CYPRESS_DOMAIN: ${{ vars.CYPRESS_DOMAIN }}
+          CYPRESS_DOMAIN: https://dev-yf34hkokp08w5btt.uk.auth0.com

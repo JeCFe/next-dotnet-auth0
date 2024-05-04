@@ -31,11 +31,6 @@ import "@testing-library/cypress/add-commands";
 Cypress.Commands.add("login", () => {
   cy.visit("/");
   cy.findByRole("link", { name: "Login" }).click();
-  console.log(
-    Cypress.env("CYPRESS_USERNAME"),
-    Cypress.env("CYPRESS_PASSWORD"),
-    Cypress.env("CYPRESS_DOMAIN"),
-  );
   cy.origin(Cypress.env("CYPRESS_DOMAIN"), () => {
     cy.get('input[name="username"]').type(Cypress.env("CYPRESS_USERNAME"));
     cy.get('input[name="password"]').type(Cypress.env("CYPRESS_PASSWORD"));
