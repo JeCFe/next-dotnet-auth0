@@ -58,7 +58,7 @@ jobs:
       - name: Run Cypress Tests
         working-directory: ./client
         env:
-          auth_username: ${{ secrets.auth_username }}
-          auth_password: ${{ secrets.auth_password }}
-          auth_domain: ${{ secrets.auth_domain }}
+          AUTH_USERNAME: ${{ secrets.AUTH_USERNAME }}
+          AUTH_PASSWORD: ${{ secrets.AUTH_PASSWORD }}
+          AUTH_DOMAIN: ${{ secrets.AUTH_DOMAIN }}
         run: npm run cypress:e2e
