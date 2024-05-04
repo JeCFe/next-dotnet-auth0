@@ -29,6 +29,13 @@ This will open a website you can view the swagger UI by going to:
 http://localhost:SOMEPORT/swagger/index.html
 ```
 
+## Build
+
+```bash
+cd server/Server
+dotnet publish --configuration Release
+```
+
 ## Local Tests
 
 # Automation tests
