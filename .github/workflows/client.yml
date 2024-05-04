@@ -48,7 +48,7 @@ jobs:
         with:
           artifact: test-results
           name: JEST Tests
-          path: "**/*.xml"
+          path: "client/junit.xml"
           reporter: jest-junit
 
       - name: Build client
