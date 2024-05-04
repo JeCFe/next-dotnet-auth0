@@ -10,7 +10,7 @@ permissions:
 
 jobs:
   # Build job
-  Test_And_Build_Node:
+  test-and-build-next:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -56,6 +56,7 @@ jobs:
         run: npx wait-on http://localhost:3000 --verbose --timeout 10000
 
       - name: Run Cypress Tests
+        working-directory: ./client
         env:
           auth_username: ${{ secrets.auth_username }}
           auth_password: ${{ secrets.auth_password }}
