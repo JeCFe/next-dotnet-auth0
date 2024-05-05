@@ -2,6 +2,8 @@
 
 A basic implementation of Auth0 using Next.js and dotnet minimal APIs that can be used as a template for future projects.
 
+Once this repo is cloned / forked / used setup as below, once completed either locally or via Azure visit the Next.js web client. Clicking the `Ping Api` button should result in a return message of `Woo Authed` this will mean that the backend and frontend have an authenticated API using Auth0 credentials connected.
+
 Forking / using this template will require some setup for Auth0, Azure, and Github environment secret setup, the following is required: 
 
 ### Azure
