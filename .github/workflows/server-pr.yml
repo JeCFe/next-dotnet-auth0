@@ -1,10 +1,8 @@
-name: Dotnet Server
-
+name: Dotnet Server - PR
 on:
-  push:
-    branches: [main]
-
+  pull_request:
   workflow_dispatch:
+
 permissions:
   packages: read
   contents: read
