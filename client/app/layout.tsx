@@ -1,11 +1,18 @@
-import type { Metadata } from "next";
+import { UserProvider } from "@auth0/nextjs-auth0/client";
 import { Footer, Header, NextUser } from "@jecfe/react-design-system";
 import "@jecfe/react-design-system/src/tailwind.css";
-import { UserProvider } from "@auth0/nextjs-auth0/client";
+import type { Metadata } from "next";
+import { Poppins } from "next/font/google";
 
 export const metadata: Metadata = {
   title: "Auth0 Client",
 };
+
+const poppins = Poppins({
+  subsets: ["latin"],
+  variable: "--font-poppins",
+  weight: "400",
+});
 
 export default function RootLayout({
   children,
@@ -15,9 +22,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <UserProvider>
-        <body className="flex flex-col min-h-screen bg-white font-mono">
+        <body className="font-poppins flex min-h-screen flex-col bg-white">
           <Header title="JeCFe - Template" user={<NextUser />} />
-          <div className="flex-1 container mx-auto">{children}</div>
+          <div className="container mx-auto flex-1">{children}</div>
           <Footer>JeCFe - Template</Footer>
         </body>
       </UserProvider>
