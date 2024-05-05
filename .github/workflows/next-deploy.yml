@@ -58,6 +58,6 @@ jobs:
           registryPassword: ${{ secrets.JECFENEXTTEMPLATECONTAINER_REGISTRY_PASSWORD }}
           containerAppName: jecfe-next-template-container
           resourceGroup: rg-shared-resources
-          imageToBuild: jecfeacr.azurecr.io/jecfe-next-template-container:${{ github.sha }}
+          imageToBuild: jecfeacr.azurecr.io/jecfe-next-template-container:latest
           _buildArgumentsKey_: |
             _buildArgumentsValues_

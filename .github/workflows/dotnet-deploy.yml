@@ -47,6 +47,6 @@ jobs:
           registryPassword: ${{ secrets.JECFEDOTNETTEMPLATECONTAINER_REGISTRY_PASSWORD }}
           containerAppName: jecfe-dotnet-template-container
           resourceGroup: rg-shared-resources
-          imageToBuild: jecfeacr.azurecr.io/jecfe-dotnet-template-container:${{ github.sha }}
+          imageToBuild: jecfeacr.azurecr.io/jecfe-dotnet-template-container:latest
           _buildArgumentsKey_: |
             _buildArgumentsValues_
