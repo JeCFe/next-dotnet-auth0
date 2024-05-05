@@ -67,23 +67,3 @@ jobs:
         if: failure()
         run: |
           docker compose logs
-
-      - name: Azure Login
-        uses: azure/login@v1
-        with:
-          client-id: ${{ secrets.JECFEDOTNETTEMPLATECONTAINER_AZURE_CLIENT_ID }}
-          tenant-id: ${{ secrets.JECFEDOTNETTEMPLATECONTAINER_AZURE_TENANT_ID }}
-          subscription-id: ${{ secrets.JECFEDOTNETTEMPLATECONTAINER_AZURE_SUBSCRIPTION_ID }}
-
-      - name: Build and push container image to registry
-        uses: azure/container-apps-deploy-action@v2
-        with:
-          appSourcePath: ${{ github.workspace }}/server
-          registryUrl: jecfeacr.azurecr.io
-          registryUsername: ${{ secrets.JECFEDOTNETTEMPLATECONTAINER_REGISTRY_USERNAME }}
-          registryPassword: ${{ secrets.JECFEDOTNETTEMPLATECONTAINER_REGISTRY_PASSWORD }}
-          containerAppName: jecfe-dotnet-template-container
-          resourceGroup: rg-shared-resources
-          imageToBuild: jecfeacr.azurecr.io/jecfe-dotnet-template-container:${{ github.sha }}
-          _buildArgumentsKey_: |
-            _buildArgumentsValues_
