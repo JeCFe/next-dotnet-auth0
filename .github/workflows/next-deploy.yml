@@ -4,25 +4,42 @@ name: Trigger auto deployment for jecfe-next-template-container
 on:
   # Automatically trigger it when detected changes in repo
   push:
-    branches: 
-      [ main ]
+    branches: [main]
     paths:
-    - 'client/**'
-    - '.github/workflows/jecfe-next-template-container-AutoDeployTrigger-3b23873a-5ece-45be-83ee-5b4e95b5601b.yml'
+      - "client/**"
+      - ".github/workflows/jecfe-next-template-container-AutoDeployTrigger-3b23873a-5ece-45be-83ee-5b4e95b5601b.yml"
 
-  # Allow manual trigger 
-  workflow_dispatch:      
+  # Allow manual trigger
+  workflow_dispatch:
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    permissions: 
+    permissions:
       id-token: write #This is required for requesting the OIDC JWT Token
       contents: read #Required when GH token is used to authenticate with private repo
 
     steps:
       - name: Checkout to the branch
         uses: actions/checkout@v2
+
+      - name: "Setup npmrc"
+        working-directory: ./client
+        run: echo -e "\n//npm.pkg.github.com/:_authToken-${{ secrets.GITHUB_TOKEN }}" >> ./.npmrc
+
+      - name: Install dependencies
+        working-directory: ./client
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npm install
+
+      - name: Build API client
+        working-directory: ./client
+        run: npm run build:client
+
+      - name: Build client
+        working-directory: ./client
+        run: npm run build
 
       - name: Azure Login
         uses: azure/login@v1
@@ -34,7 +51,7 @@ jobs:
       - name: Build and push container image to registry
         uses: azure/container-apps-deploy-action@v2
         with:
-          appSourcePath: ${{ github.workspace }}/client 
+          appSourcePath: ${{ github.workspace }}/client
           registryUrl: jecfeacr.azurecr.io
           registryUsername: ${{ secrets.JECFENEXTTEMPLATECONTAINER_REGISTRY_USERNAME }}
           registryPassword: ${{ secrets.JECFENEXTTEMPLATECONTAINER_REGISTRY_PASSWORD }}
@@ -43,5 +60,3 @@ jobs:
           imageToBuild: jecfeacr.azurecr.io/jecfe-next-template-container:${{ github.sha }}
           _buildArgumentsKey_: |
             _buildArgumentsValues_
-
-
