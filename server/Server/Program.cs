@@ -9,10 +9,12 @@ public class Program
     static async Task Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
-        IConfiguration configuration = new ConfigurationBuilder()
-            .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
-            .AddJsonFile("appsettings.development.json")
-            .Build();
+        IConfiguration configuration = builder.Configuration;
+
+        if (builder.Environment.IsDevelopment())
+        {
+            builder.Configuration.AddJsonFile("appsettings.development.json", true);
+        }
 
         builder
             .Services

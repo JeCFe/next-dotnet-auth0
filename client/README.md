@@ -26,9 +26,9 @@ You will need the following in a `cypress.env.json` file
 
 ```
 {
-  "auth_username": ****,
-  "auth_password": ****,
-  "auth_domain": ****
+  "CYPRESS_USERNAME": ****,
+  "CYPRESS_PASSWORD": ****,
+  "CYPRESS_DOMAIN": ****
 }
 
 ```

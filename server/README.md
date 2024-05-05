@@ -48,8 +48,8 @@ You will need the following in a `cypress.env.json` file
   "auth_url": ****,
   "auth_client_id": ****,
   "auth_client_secret": ****,
-  "auth_username": ****,
-  "auth_password": ****,
+  "CYPRESS_USERNAME": ****,
+  "CYPRESS_PASSWORD": ****,
 }
 
 ```

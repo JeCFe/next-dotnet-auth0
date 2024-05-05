@@ -31,11 +31,11 @@ import "@testing-library/cypress/add-commands";
 Cypress.Commands.add("login", () => {
   cy.visit("/");
   cy.findByRole("link", { name: "Login" }).click();
-  cy.origin(Cypress.env("auth_domain"), () => {
-    cy.get('input[name="username"]').type(Cypress.env("auth_username"));
-    cy.get('input[name="password"]').type(Cypress.env("auth_password"));
+  cy.origin(Cypress.env("CYPRESS_DOMAIN"), () => {
+    cy.get('input[name="username"]').type(Cypress.env("CYPRESS_USERNAME"));
+    cy.get('input[name="password"]').type(Cypress.env("CYPRESS_PASSWORD"));
     cy.get('button[name="action"]').click();
   });
   cy.findByRole("link", { name: "Logout" });
-  cy.findByText(Cypress.env("auth_username"));
+  cy.findByText(Cypress.env("CYPRESS_USERNAME"));
 });
