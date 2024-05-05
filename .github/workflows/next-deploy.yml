@@ -1,11 +1,10 @@
 name: Next.js Azure Deployment
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - "client/**"
-      - ".github/workflows/next-deploy.yml"
+  workflow_run:
+    workflows: [Next.js Client]
+    types:
+      - completed
 
   workflow_dispatch:
 

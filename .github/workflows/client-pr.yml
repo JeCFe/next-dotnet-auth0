@@ -1,9 +1,8 @@
-name: Next.js Client
+name: Next.js Client - PR
 on:
-  push:
-    branches: [main]
-
+  pull_request:
   workflow_dispatch:
+
 permissions:
   packages: read
   contents: read
