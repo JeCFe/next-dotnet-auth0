@@ -1,4 +1,4 @@
-name: Trigger auto deployment for jecfe-next-template-container
+name: Dotnet Azure Deployment
 
 # When this action will be executed
 on:
