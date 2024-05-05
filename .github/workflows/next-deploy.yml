@@ -1,4 +1,4 @@
-name: Dotnet Azure Deployment
+name: Next.js Azure Deployment
 
 # When this action will be executed
 on:
