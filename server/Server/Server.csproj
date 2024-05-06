@@ -15,4 +15,8 @@
     <None Include="server\Properties\launchSettings.json" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Server.Domain\Server.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
